@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EasyHome</title>
+    <link rel="websiteicon" href="" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- navbar -->
+    <script>
+      function toggleMenu() {
+        const navLinks = document.querySelector(".nav-links");
+        navLinks.classList.toggle("active");
+      }
+
+      // Update cart count (example)
+      function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        document.querySelector(".cart-count").textContent = cart.length;
+      }
+
+      // Initialize cart count
+      updateCartCount();
+    </script>
+    <!-- slider -->
+    <script src="script.js"></script>
+    <!-- carousel -->
+    <script>
+      // Simple carousel controls
+      const slider = document.querySelector(".carousel-slider");
+      let isPaused = false;
+
+      slider.addEventListener("mouseenter", () => (isPaused = true));
+      slider.addEventListener("mouseleave", () => (isPaused = false));
+
+      // Optional: Add manual controls
+      function slide(direction) {
+        const currentTransform = window.getComputedStyle(slider).transform;
+        const matrix = new DOMMatrix(currentTransform);
+        const currentSlide = Math.round(matrix.m41 / window.innerWidth);
+
+        if (direction === "next") {
+          slider.style.transform = `translateX(-${(currentSlide + 1) * 20}%)`;
+        } else {
+          slider.style.transform = `translateX(-${(currentSlide - 1) * 20}%)`;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <section class="sec1">
+      <nav class="navbar">
+        <img src="/img/logoicon.png" alt="" style="height: 100px; ">
+        <h1>EasyHome</h1>
+
+        <div class="nav-container">
+          <button class="mobile-menu-btn" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <ul class="nav-links">
+            <li>
+              <a href="index.html">
+                <i class="fas fa-home"></i>
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="about.html">
+                <i class="fas fa-info-circle"></i>
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="contact.html">
+                <i class="fas fa-envelope"></i>
+                Contact
+              </a>
+            </li>
+           
+          </ul>
+        </div>
+      </nav>
+    </section>
+
+    <section class="task">
+      <div class="taskbar">
+        <div class="category">
+          <h6>PARTICLEBOARD & OSB</h6>
+          <ul class="subcategory">
+            <li><a href="/product.html?filter=Raw">Raw</a></li>
+            <li><a href="/product.html?filter=White">White</a></li>
+            <li><a href="/product.html?filter=Woodgrain">Woodgrain</a></li>
+            <li><a href="product.html?filter=Pattern">Pattern</a></li>
+            <li><a href="product.html?filter=OSB">OSB</a></li>
+          </ul>
+        </div>
+        <div class="category">
+          <h6>MDF BOARDS & MDF BACKERS</h6>
+          <ul class="subcategory">
+            <li><a href="/product.html?filter=Raw">Raw</a></li>
+            <li><a href="/product.html?filter=White">White</a></li>
+          </ul>
+        </div>
+        <div class="category">
+          <h6>MATT GLOSS & TEXTURES</h6>
+          <ul class="subcategory">
+            <li><a href="/product.html?filter=Gloss White">Gloss White</a></li>
+            <li>
+              <a href="/product.html?filter=Gloss Woodgrain">Gloss Woodgrain</a>
+            </li>
+            <li><a href="/product.html?filter=Gloss Plain">Gloss Plain</a></li>
+            <li>
+              <a href="/product.html?filter=Gloss Pattern">Gloss Pattern</a>
+            </li>
+            <li><a href="/product.html?filter=Matt White">Matt White</a></li>
+            <li><a href="/product.html?filter=Matt Plain">Matt Plain</a></li>
+            <li>
+              <a href="/product.html?filter=Matt Pattern">Matt Pattern</a>
+            </li>
+            <li>
+              <a href="/product.html?filter=Texture Mosaico">Texture Mosaico</a>
+            </li>
+            <li>
+              <a href="/product.html?filter=Texture Prima Fiore"
+                >Texture Prima Fiore</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="category">
+          <h6>EDGINGS & COVER CAPS</h6>
+          <ul class="subcategory">
+            <li>
+              <a href="/product.html?filter=Edging White">Edging White</a>
+            </li>
+            <li>
+              <a href="/product.html?filter=Edging Plain">Edging Plain</a>
+            </li>
+            <li>
+              <a href="/product.html?filter=Edging Woodgrain"
+                >Edging Woodgrain</a
+              >
+            </li>
+            <li>
+              <a href="/product.html?filter=Edging Pattern">Edging Pattern</a>
+            </li>
+            <li>
+              <a href="/product.html?filter=Cover Caps White"
+                >Cover Caps White</a
+              >
+            </li>
+            <li>
+              <a href="/product.html?filter=Cover Caps Plain"
+                >Cover Caps Plain</a
+              >
+            </li>
+            <li>
+              <a href="/product.html?filter=Cover Caps Pattern"
+                >Cover Caps Pattern</a
+              >
+            </li>
+            <li>
+              <a href="/product.html?filter=Cover Caps Woodgrain"
+                >Cover Caps Woodgrain</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="category">
+          <h6>PVC FOILS WRAP</h6>
+          <ul class="subcategory">
+            <li>
+              <a href="/product.html?filter=Pvc Foil Wrap">Pvc Foil Wrap</a>
+            </li>
+          </ul>
+        </div>
+        <div class="category">
+          <h6>FURNITURE FITTINGS</h6>
+          <ul class="subcategory">
+            <li><a href="/product.html?filter=Handles">Handles</a></li>
+            <li><a href="/product.html?filter=Hinges">Hinges</a></li>
+            <li><a href="/product.html?filter=Runners">Runners</a></li>
+            <li><a href="/product.html?filter=Connectors">Conectors</a></li>
+            <li><a href="/product.html?filter=Sliding">Sliding</a></li>
+            <li>
+              <a href="/product.html?filter=Legs & Skirting"
+                >Legs & Skirting
+              </a>
+            </li>
+            <li><a href="/product.html?filter=Supports">Supports </a></li>
+            <li><a href="/product.html?filter=Accessories">Accessories </a></li>
+          </ul>
+        </div>
+        <div class="category">
+          <h6>ALUMINIUM</h6>
+          <ul class="subcategory">
+            <li>
+              <a href="/product.html?filter=Aluminium Handles"
+                >Aluminium Handles</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec2">
+      <!-- image slider -->
+      <div class="slider-container">
+        <div class="slider">
+          <div class="slide active">
+            <img
+              src="/images/slider1.jpg"
+              alt="Slide 1"
+              style="object-fit: cover"
+            />
+            <div class="caption">Caption for Slide 1</div>
+          </div>
+          <div class="slide">
+            <img src="/images/slider2.jpg" alt="Slide 2" />
+            <div class="caption">Caption for Slide 2</div>
+          </div>
+          <div class="slide">
+            <img src="/images/slider3.jpg" alt="Slide 3" />
+            <div class="caption">Caption for Slide 3</div>
+          </div>
+          <div class="slide">
+            <img src="/images/slider4.jpg" alt="Slide 4" />
+            <div class="caption">Caption for Slide 4</div>
+          </div>
+        </div>
+
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+
+        <div class="dots-container">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- services -->
+
+    <section
+      class="interior-quality-section"
+      style="background-color: white; padding: 4rem 1rem"
+    >
+      <div class="container" style="max-width: 1200px; margin: 0 auto">
+        <h2
+          style="
+            color: black;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+          "
+        >
+          Quality for Your Interior
+        </h2>
+
+        <p
+          class="tagline"
+          style="
+            color: lightslategray;
+            text-align: center;
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+          "
+        >
+          Crafting spaces that blend functionality with timeless elegance
+        </p>
+
+        <div
+          class="services-grid"
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+          "
+        >
+          <!-- Service Items -->
+          <div class="service-item" style="text-align: center; padding: 1.5rem">
+            <i
+              class="fas fa-kitchen-set"
+              style="color: black; font-size: 2.5rem; margin-bottom: 1rem"
+            ></i>
+            <h3 style="color: lightslategray; margin: 0.5rem 0">Custom Kitchens</h3>
+          </div>
+
+          <div class="service-item" style="text-align: center; padding: 1.5rem">
+            <i
+              class="fas fa-cube"
+              style="color: black; font-size: 2.5rem; margin-bottom: 1rem"
+            ></i>
+            <h3 style="color: lightslategray; margin: 0.5rem 0">Smart Cupboards</h3>
+          </div>
+
+          <div class="service-item" style="text-align: center; padding: 1.5rem">
+            <i
+              class="fas fa-draw-polygon"
+              style="color: black; font-size: 2.5rem; margin-bottom: 1rem"
+            ></i>
+            <h3 style="color: lightslategray; margin: 0.5rem 0">Drawer Systems</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services">
+      <div class="sub-services">
+        <div class="service-card">
+          <i class="fa-solid fa-screwdriver-wrench " style="font-size: 50px; color: #2d2f3e;"></i>
+          <h2>Quality Products</h2>
+          <p>Quality Products  Without Compromise </p>
+
+        </div>
+        <div class="service-card">
+          <i class="fa-solid fa-money-bills" style="font-size: 50px; color: #2d2f3e;"></i>
+          <h2>Affordable Prices</h2>
+          <p>Affordable Prices on our products</p>
+
+        </div>
+        <div class="service-card">
+          <i class="fa-solid fa-cart-shopping" style="font-size: 50px; color: #2d2f3e;"></i>
+          <h2>Authentic</h2>
+          <p>We uphold authenticity <br> Real Value Real Products </p>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- <section class="sec3">
+      <p class="items">HOT PRODUCTS</p>
+      <div class="item-group">
+        <div class="item">
+          <img src="/images/item3.png" alt="" />
+          <h6>FURNITURE FITTINGS -STEEL CONNER</h6>
+          <button>
+            <a href="/product.html?filter=Connectors">VIEW DETAILS</a>
+          </button>
+        </div>
+        <div class="item">
+          <img src="/images/item4.png" alt="handle" />
+          <h6>FURNITURE FITTINGS - DOOR HANDLE</h6>
+          <button>
+            <a href="/product.html?filter=Handles">VIEW DETAILS</a>
+          </button>
+        </div>
+        <div class="item">
+          <img src="/images/item1.png" alt="" />
+          <h6>FURNITURE FITTINGS - CABINET LEG MATT BLACK</h6>
+
+          <button>
+            <a href="/product.html?filter=Legs & Skirting">VIEW DETAILS</a>
+          </button>
+        </div>
+        <div class="item">
+          <img src="/images/item2.png" alt="" />
+          <h6>FURNITURE FITTINGS - CORNER CONNECTOR</h6>
+          <button>
+            <a href="/product.html?filter=Connectors">VIEW DETAILS</a>
+          </button>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- about us  -->
+    <section
+      class="about-us"
+      style="background-color: darkgray; padding-top: 20px; height: 110dvh;"
+    >
+        <div
+          class="about-content"
+          style="
+             max-width: 1200px; 
+             height: 100%;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr ;
+            gap: 3rem;
+          " 
+        >
+          <div class="about-text">
+            <h2>ABOUT US</h2>
+            <p>At EasyHome, we're redefining online shopping through curated
+              collections, exceptional quality, and customer-first service.We've
+              grown from a small startup to a trusted name in ecommerce,
+              delivering happiness to over 1000 customers.</p>
+          </div>
+          
+          
+          <!-- right column -->
+          <div class="about-img">
+             <img src="/images/indexab1.jpg" alt="" class="img1" />
+            <img src="/images/indexab1.jpg" alt="" class="img2" />  
+            <img src="/images/indexab2.jpg" alt="" class="img3" />  
+            <img src="/images/indexab3.jpg" alt="" class="img4" />  
+          </div>
+        </div>
+        
+      <!-- Content Section -->
+    </section>
+
+    <section class="mis">
+      <img src="/images/mision.jpg" alt="">
+      <div class="mis-over">
+        <div class="mission-vision" style="display: grid; gap: 2rem; margin-top: 50px;">
+          <div
+            class="mission"
+            style="padding-left: 1.5rem; border-left: 3px solid #fde910"
+          >
+            <h3 style="color: #fde910; margin-bottom: 1rem">Our Mission</h3>
+            <p style="line-height: 1.6; color: white; ">
+              To empower consumers with high-quality products, seamless
+              shopping experiences, and value that extends beyond the
+              transaction.
+            </p>
+          </div>
+
+          <div
+            class="vision"
+            style="padding-right: 1.5rem; border-right: 3px solid #fde910; padding-top:0px ;"
+          >
+            <h3
+              style="color: #fde910; margin-bottom: 1rem; text-align: right"
+            >
+              Our Vision
+            </h3>
+            <p style="line-height: 1.6; text-align: right; color: white;">
+              To become the most customer-centric ecommerce platform while
+              maintaining sustainable business practices and community
+              impact.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- testimonials  -->
+    <section
+      class="testimonials"
+      style="background-color: #ffffff; padding: 5rem 0; height: auto;"
+    >
+      <div
+        class="testimonials-container"
+        style="max-width: 1200px; margin: 0 auto; padding: 0 2rem"
+      >
+        <h2
+          style="
+            text-align: center;
+            color: #fde910;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+          "
+        >
+          What Our Customers Say
+        </h2>
+
+        <div
+          class="testimonials-grid"
+          style="
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+          "
+        >
+          <!-- Testimonial 1 -->
+          <div
+            class="testimonial-card"
+            style="
+              background: rgba(255, 255, 255, 0.05);
+              padding: 2rem;
+              border-radius: 15px;
+              border: 1px solid #fde910;
+              position: relative;
+            "
+          >
+            <div
+              class="quote-icon"
+              style="
+                position: absolute;
+                top: -20px;
+                left: -20px;
+                background: #0f0616;
+                padding: 10px;
+                border-radius: 50%;
+              "
+            >
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="#fde910">
+                <path
+                  d="M10 7L8 11H11V17H5V11L7 7H10M18 7L16 11H19V17H13V11L15 7H18Z"
+                />
+              </svg>
+            </div>
+            <div class="stars" style="margin-bottom: 1rem; color: #fde910">
+              ★★★★★
+            </div>
+            <p style="color: #0f0616; line-height: 1.6; margin-bottom: 1.5rem">
+              "The shopping experience here is unparalleled! From the product
+              quality to the seamless delivery, every detail is perfection."
+            </p>
+            <div
+              class="customer"
+              style="display: flex; align-items: center; gap: 1rem"
+            >
+              <div
+                class="avatar"
+                style="
+                  width: 50px;
+                  height: 50px;
+                  border-radius: 50%;
+                  background: #fde910;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <span style="color: #0f0616; font-weight: bold">JD</span>
+              </div>
+              <div>
+                <h4 style="color: #fde910; margin: 0">John Doe</h4>
+                <p style="color: #0f0616; margin: 0; opacity: 0.8">
+                  Verified Buyer
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div
+            class="testimonial-card"
+            style="
+              background: rgba(255, 255, 255, 0.05);
+              padding: 2rem;
+              border-radius: 15px;
+              border: 1px solid #fde910;
+              position: relative;
+            "
+          >
+            <div
+              class="quote-icon"
+              style="
+                position: absolute;
+                top: -20px;
+                left: -20px;
+                background: #0f0616;
+                padding: 10px;
+                border-radius: 50%;
+              "
+            >
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="#fde910">
+                <path
+                  d="M10 7L8 11H11V17H5V11L7 7H10M18 7L16 11H19V17H13V11L15 7H18Z"
+                />
+              </svg>
+            </div>
+            <div class="stars" style="margin-bottom: 1rem; color: #fde910">
+              ★★★★★
+            </div>
+            <p style="color: #0f0616; line-height: 1.6; margin-bottom: 1.5rem">
+              "I keep coming back for the exceptional customer service and
+              curated collections. Truly a cut above the rest!"
+            </p>
+            <div
+              class="customer"
+              style="display: flex; align-items: center; gap: 1rem"
+            >
+              <div
+                class="avatar"
+                style="
+                  width: 50px;
+                  height: 50px;
+                  border-radius: 50%;
+                  background: #fde910;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <span style="color: #0f0616; font-weight: bold">AS</span>
+              </div>
+              <div>
+                <h4 style="color: #fde910; margin: 0">Alice Smith</h4>
+                <p style="color: #0f0616; margin: 0; opacity: 0.8">
+                  Loyal Customer
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div
+            class="testimonial-card"
+            style="
+              background: rgba(255, 255, 255, 0.05);
+              padding: 2rem;
+              border-radius: 15px;
+              border: 1px solid #fde910;
+              position: relative;
+            "
+          >
+            <div
+              class="quote-icon"
+              style="
+                position: absolute;
+                top: -20px;
+                left: -20px;
+                background: #0f0616;
+                padding: 10px;
+                border-radius: 50%;
+              "
+            >
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="#fde910">
+                <path
+                  d="M10 7L8 11H11V17H5V11L7 7H10M18 7L16 11H19V17H13V11L15 7H18Z"
+                />
+              </svg>
+            </div>
+            <div class="stars" style="margin-bottom: 1rem; color: #fde910">
+              ★★★★★
+            </div>
+            <p style="color: #0f0616; line-height: 1.6; margin-bottom: 1.5rem">
+              "The attention to detail in packaging and fast shipping makes
+              every purchase feel like a luxury experience."
+            </p>
+            <div
+              class="customer"
+              style="display: flex; align-items: center; gap: 1rem"
+            >
+              <div
+                class="avatar"
+                style="
+                  width: 50px;
+                  height: 50px;
+                  border-radius: 50%;
+                  background: #fde910;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
+                <span style="color: #0f0616; font-weight: bold">MJ</span>
+              </div>
+              <div>
+                <h4 style="color: #fde910; margin: 0">Mike Johnson</h4>
+                <p style="color: #0f0616; margin: 0; opacity: 0.8">
+                  First-time Buyer
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <!-- Contact Information -->
+        <div class="footer-section contact-info">
+          <h4>Contact Us</h4>
+          <div class="address">
+            Kampala Rd, Industrial Area<br />
+            P.O. Box 45221-00100<br />
+            Nairobi, Kenya
+          </div>
+          <div class="contact-details">07</div>
+          <div class="email">info@easyhome.co.ke</div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Products -->
+        <div class="footer-section">
+          <h4>Our Products</h4>
+          <ul>
+            <li><a href="#">Boards</a></li>
+            <li><a href="#">Matt Gloss</a></li>
+            <li><a href="#">Edging</a></li>
+            <li><a href="#">PVC Foil Wrap</a></li>
+            <li><a href="#">Furniture Fittings</a></li>
+            <li><a href="#">Aluminium Systems</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="copyright">© 2025 EASYHOME. All rights reserved.</div>
+    </footer>
+  </body>
+</html>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+  }
+  :root {
+    --gold: #fde910;
+    --black: #0f0616;
+    -white: #ffffff;
+  }
+  .sec1 {
+    height: auto;
+  }
+  .navbar {
+    background: white;
+    box-shadow: 0 2px 10px rgba(15, 6, 22, 0.1);
+    position: relative;
+    max-width: 100vw;
+    height: 15vh;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .navbar h1 {
+    font-size: 30px;
+    text-transform: uppercase;
+  }
+
+  .nav-container {
+    display: flex;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: #0f0616;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    padding: 0.5rem 0;
+  }
+
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #fde910;
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #0f0616;
+    cursor: pointer;
+  }
+
+  .cart-count {
+    background: #fde910;
+    color: #0f0616;
+    padding: 0.2rem 0.5rem;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    margin-left: 0.3rem;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      flex-direction: column;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 10px rgba(15, 6, 22, 0.1);
+      z-index: 100;
+    }
+
+    .nav-links.active {
+      display: flex;
+    }
+
+    .mobile-menu-btn {
+      display: block;
+    }
+
+    .nav-links a {
+      padding: 1rem 0;
+    }
+  }
+  .task {
+    background-color: black;
+    width: 98vw;
+    height: 15vh;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin: auto;
+    margin-bottom: 5px;
+  }
+  .taskbar {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: space-evenly;
+  }
+  .category {
+    position: relative;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: auto;
+    height: 100%;
+  }
+  .category h6 {
+    font-size: 12px;
+    padding-top: 40px;
+    cursor: pointer;
+    color: #ffffff;
+  }
+  .subcategory {
+    position: absolute;
+    top: 100%;
+    z-index: 50;
+    background-color: #ffffff;
+    height: auto;
+    width: 100%;
+    overflow-x: none;
+    border-radius: 10px;
+    box-shadow: 2px 2px 15px darkgray;
+    display: none;
+  }
+  .subcategory a {
+    text-decoration: none;
+    color: #0f0616;
+    width: 100%;
+  }
+  .subcategory li {
+    text-align: center;
+    border-bottom: solid lightgray 1px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    list-style: none;
+    border-radius: 10px;
+  }
+  .subcategory li:hover {
+    background-color: var(--gold);
+    transition: 1s ease-in-out;
+  }
+  .subcategory li a:hover {
+    color: goldenrod;
+    transition: 1s;
+  }
+  .subcategory :last-child {
+    border-bottom: none;
+  }
+  .category:hover .subcategory {
+    display: block;
+  }
+
+  .sec2 {
+    height: 85vh;
+    width: 95vw;
+    margin: auto;
+  }
+
+  .slider-container {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    height: 100%;
+  }
+
+  .slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 100%;
+  }
+
+  .slide {
+    min-width: 100%;
+  }
+
+  .slide img {
+    width: 100%;
+    display: block;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 15px;
+    text-align: center;
+  }
+
+  .prev,
+  .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+    border-radius: 50%;
+  }
+
+  .prev:hover,
+  .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  .prev {
+    left: 10px;
+  }
+
+  .next {
+    right: 10px;
+  }
+
+  .dots-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .dot.active {
+    background-color: white;
+  }
+
+  @media (max-width: 768px) {
+    .prev,
+    .next {
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    .caption {
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+  .sec3 {
+    height: 85vh;
+    background-color: lightgray;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 97vw;
+    margin: auto;
+  }
+  .sec3 .items {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 10px;
+    padding-top: 10px;
+    text-decoration: underline;
+    text-underline-offset: 10px;
+  }
+  .sec3 p {
+    color: goldenrod;
+    line-height: 1.5em;
+  }
+  .item-group {
+    display: flex;
+    margin-top: 20px;
+    height: 70vh;
+    width: 100%;
+    justify-content: space-around;
+  }
+  .item {
+    background-color: white;
+    height: 300px;
+    width: 23vw;
+    border-radius: 20px;
+    box-shadow: 2px 2px 10px 5px lightgray;
+    text-align: center;
+  }
+  .item img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    height: 70%;
+  }
+  .item a {
+    color: goldenrod;
+    text-decoration: none;
+    padding-top: 10px;
+  }
+  .item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 0;
+  }
+  .item button {
+    background-color: var(--white);
+    width: 120px;
+    height: 50px;
+    border: solid 2px goldenrod;
+    border-radius: 10px;
+    color: goldenrod;
+  }
+
+  /* services */
+
+  .service-item {
+    transition: transform 0.3s ease;
+  }
+  .service-item:hover {
+    transform: translateY(-5px);
+  }
+  .service a:hover {
+    color: #ffffff;
+    border-color: #ffffff;
+  }
+
+  /* about content */
+  .about-text{
+    padding-top: 7em;
+    color: white;
+
+  }
+  .about-text p{
+    padding-top: 20px;
+    font-size: 20px;
+  }
+  .about-img{
+    height: 100vh;
+    position: relative;
+    display: flex;
+  }
+  .about-img .img1{
+    height: 500px;
+    width: 100%;
+    object-fit: cover;
+    clip-path: ellipse(50% 50% at right);
+  }
+  .about-img .img2{
+    height: 500px;
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+    clip-path: ellipse(50% 50% at left);
+    overflow: hidden;
+  }
+  .about-img .img3{
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border: solid white 5px;
+    border-radius: 50%;
+  }
+  .about-img .img4{
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border: solid white 5px;
+    border-radius: 50%;
+    top: 60%;
+    left: 30%;
+  }
+  .about-img img:hover{
+     transform: scale(1.05);
+     transition: 1s ease-in ;
+  }
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .about-content {
+      grid-template-columns: 1fr !important;
+    }
+ 
+    .about-img .img1{
+      height: 270px;
+      clip-path: ellipse(50% 50% at right);
+    }
+    .about-img .img2{
+      height: 270px;
+      clip-path: ellipse(50% 50% at left);
+    }
+    .about-img .img3{
+      height: 120px;
+      width: 120px;
+    }
+    .about-img .img4{
+      height: 120px;
+      width: 120px;
+      top: 25%;
+    }
+    .about-text{
+      padding-top:20px;
+    }
+   
+  }
+
+  .services{
+    height: 50vh;
+    width: 100%;
+    margin-bottom: 5px;
+
+  }
+  .sub-services{
+    display: flex;
+    height: 100%;
+    width: 90%;
+    /* background-color: lightgray; */
+    margin: auto;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .service-card{
+    height: 35vh;
+    width: 30%;
+    background-color: #3d474e;
+    border-radius: 10px;
+    padding-top: 30px;
+    text-align: center;
+     line-height: 25px;
+     color: white;
+  }
+  .service-card:hover{
+    background-color: white;
+    color: #3d474e;
+    transition: 1s ease-in-out;
+    border: #3d474e solid 1px ;
+  }
+  
+
+  /* mission  */
+
+  .mis{
+      background-color: darkgray;
+      height: 60vh;
+      width: 100%;
+      position: relative;
+  }
+  .mis img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  .mis-over{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+
+  }
+
+  /* testimonials */
+
+  .testimonial-card:hover {
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(253, 233, 16, 0.1);
+  }
+
+  .avatar {
+    transition: transform 0.3s ease;
+  }
+
+  .testimonial-card:hover .avatar {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 768px) {
+    .testimonials-grid {
+      grid-template-columns: 1fr !important;
+      gap: 3rem !important;
+    }
+
+    .testimonial-card {
+      margin: 0 1rem;
+    }
+  }
+
+  /* footer */
+  .footer {
+    background-color: var(--black);
+    color: white;
+    padding: 40px 20px;
+    font-family: "Arial", sans-serif;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+  }
+
+  .footer-section {
+    margin-bottom: 25px;
+  }
+
+  .contact-info {
+    border-right: 2px solid var(--gold);
+    padding-right: 30px;
+  }
+
+  .footer h4 {
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .footer ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer li {
+    margin-bottom: 10px;
+  }
+
+  .footer a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer a:hover {
+    color: var(--gold);
+  }
+
+  .address {
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
+
+  .contact-details::before {
+    content: "📞";
+    margin-right: 8px;
+  }
+
+  .email::before {
+    content: "📧";
+    margin-right: 8px;
+  }
+
+  .copyright {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(253, 233, 16, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    .footer-container {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-info {
+      border-right: none;
+      padding-right: 0;
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 30px;
+    }
+  }
+</style>

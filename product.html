@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- navbar -->
+    <script>
+      function toggleMenu() {
+        const navLinks = document.querySelector(".nav-links");
+        navLinks.classList.toggle("active");
+      }
+
+      // Update cart count (example)
+      function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        document.querySelector(".cart-count").textContent = cart.length;
+      }
+
+      // Initialize cart count
+      updateCartCount();
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get the filter parameter from URL
+        const urlParams = new URLSearchParams(window.location.search);
+
+        const filter = urlParams.get("filter");
+
+        if (filter) {
+          const products = document.querySelectorAll(".product");
+
+          products.forEach((product) => {
+            // Show only products that match the filter
+            if (product.dataset.category !== filter) {
+              product.style.display = "none";
+            } else {
+              product.style.display = "block"; // Or your preferred display style
+            }
+          });
+        }
+      });
+
+
+      
+      // products.js (updated)
+      document.addEventListener("DOMContentLoaded", function () {
+        // Load products from localStorage
+        const loadProducts = () => {
+          const storedProducts = localStorage.getItem("products");
+          return storedProducts ? JSON.parse(storedProducts) : [];
+        };
+
+        // Render products
+        const renderProducts = (products) => {
+          const productGrid = document.querySelector(".product-grid");
+          productGrid.innerHTML = ""; // Clear existing products
+
+          products.forEach((product) => {
+            const productCard = `
+                <div class="product-card" data-category="${product.category}">
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p class="product-category">${product.category}</p>
+                        <p class="product-price">$${product.price}</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            `;
+            productGrid.insertAdjacentHTML("beforeend", productCard);
+          });
+        };
+
+        // Initial load
+        const allProducts = loadProducts();
+        renderProducts(allProducts);
+      });
+    </script>
+  </head>
+  <body>
+    <!-- navbar -->
+    <section class="sec1">
+      <nav class="navbar">
+        <h1>EasyHome</h1>
+
+        <div class="nav-container">
+          <button class="mobile-menu-btn" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <ul class="nav-links">
+            <li>
+              <a href="index.html">
+                <i class="fas fa-home"></i>
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="about.html">
+                <i class="fas fa-info-circle"></i>
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="contact.html">
+                <i class="fas fa-envelope"></i>
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </section>
+
+    <!-- body -->
+    <section class="product-section">
+      <div class="product-container">
+        <div class="product-grid">
+          <div class="product-card" data-category="Raw">
+            <img
+              src="https://picsum.photos/300/200?random=1"
+              alt="Raw Particleboard"
+            />
+            <div class="product-info">
+              <h3>Raw Particleboard</h3>
+              <p class="product-category">Raw</p>
+              <p class="product-price">$45.99</p>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
+          </div>
+          <div class="product-card" data-category="White">
+            <img src="https://picsum.photos/300/200?" alt="White Melamine" />
+            <div class="product-info">
+              <h3>White Melamine</h3>
+              <p class="product-category">White Finish</p>
+              <p class="product-price">$55.99</p>
+              <button class="add-to-cart">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <!-- Contact Information -->
+        <div class="footer-section contact-info">
+          <h4>Contact Us</h4>
+          <div class="address">
+            Kampala Rd, Industrial Area<br />
+            P.O. Box 45221-00100<br />
+            Nairobi, Kenya
+          </div>
+          <div class="contact-details">07</div>
+          <div class="email">info@easyhome.co.ke</div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Products -->
+        <div class="footer-section">
+          <h4>Our Products</h4>
+          <ul>
+            <li><a href="/product.html?filter=">Boards</a></li>
+            <li><a href="/product.html?filter">Matt Gloss</a></li>
+            <li><a href="/product.html?filter">Edging</a></li>
+            <li><a href="/product.html?filter">PVC Foil Wrap</a></li>
+            <li><a href="/product.html?filter">Furniture Fittings</a></li>
+            <li><a href="/product.html?filter">Aluminium Systems</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="copyright">© 2025 EASYHOME. All rights reserved.</div>
+    </footer>
+  </body>
+</html>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+  }
+  :root {
+    --gold: #fde910;
+    --black: #0f0616;
+    -white: #ffffff;
+  }
+  .sec1 {
+    height: auto;
+  }
+  .navbar {
+    background: white;
+    box-shadow: 0 2px 10px rgba(15, 6, 22, 0.1);
+    position: relative;
+    max-width: 100vw;
+    height: 15vh;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .navbar h1 {
+    font-size: 30px;
+    text-transform: uppercase;
+  }
+
+  .nav-container {
+    display: flex;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: #0f0616;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    padding: 0.5rem 0;
+  }
+
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #fde910;
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #0f0616;
+    cursor: pointer;
+  }
+
+  .cart-count {
+    background: #fde910;
+    color: #0f0616;
+    padding: 0.2rem 0.5rem;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    margin-left: 0.3rem;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      flex-direction: column;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 10px rgba(15, 6, 22, 0.1);
+      z-index: 100;
+    }
+
+    .nav-links.active {
+      display: flex;
+    }
+
+    .mobile-menu-btn {
+      display: block;
+    }
+
+    .nav-links a {
+      padding: 1rem 0;
+    }
+  }
+
+  .product-section {
+    padding: 4rem 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    min-height: 60vh;
+  }
+
+  .product-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .product-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  .product-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 3px solid var(--gold);
+  }
+
+  .product-info {
+    padding: 1.5rem;
+    color: var(--black);
+  }
+  .product-info h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-category {
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-price {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 1rem 0;
+  }
+  @media (max-width: 768px) {
+    .product-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .product-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* footer */
+  .footer {
+    background-color: var(--black);
+    color: white;
+    padding: 40px 20px;
+    font-family: "Arial", sans-serif;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+  }
+
+  .footer-section {
+    margin-bottom: 25px;
+  }
+
+  .contact-info {
+    border-right: 2px solid var(--gold);
+    padding-right: 30px;
+  }
+
+  .footer h4 {
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .footer ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer li {
+    margin-bottom: 10px;
+  }
+
+  .footer a {
+    color: var(--white);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer a:hover {
+    color: var(--gold);
+  }
+
+  .address {
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
+
+  .contact-details::before {
+    content: "📞";
+    margin-right: 8px;
+  }
+
+  .email::before {
+    content: "📧";
+    margin-right: 8px;
+  }
+
+  .copyright {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(253, 233, 16, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    .footer-container {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-info {
+      border-right: none;
+      padding-right: 0;
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 30px;
+    }
+  }
+</style>

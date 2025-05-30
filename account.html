@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account Page</title>
+    <link rel="websiteicon" href="">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- navbar -->
+    <script>
+      function toggleMenu() {
+        const navLinks = document.querySelector(".nav-links");
+        navLinks.classList.toggle("active");
+      }
+
+      // Update cart count (example)
+      function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        document.querySelector(".cart-count").textContent = cart.length;
+      }
+
+      // Initialize cart count
+      updateCartCount();
+    </script>
+
+    <!-- forms -->
+    <script>
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const user = {
+            name: document.getElementById("registerName").value,
+            email: document.getElementById("registerEmail").value,
+            password: document.getElementById("registerPassword").value,
+          };
+
+          if (
+            user.password !==
+            document.getElementById("registerConfirmPassword").value
+          ) {
+            alert("Passwords do not match!");
+            return;
+          }
+
+          const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+          if (existingUsers.find((u) => u.email === user.email)) {
+            alert("User already exists!");
+            return;
+          }
+
+          existingUsers.push(user);
+          localStorage.setItem("users", JSON.stringify(existingUsers));
+          alert("Registration successful! You can now login.");
+          this.reset();
+        });
+
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const email = document.getElementById("loginEmail").value;
+          const password = document.getElementById("loginPassword").value;
+
+          const users = JSON.parse(localStorage.getItem("users")) || [];
+          const user = users.find(
+            (u) => u.email === email && u.password === password
+          );
+
+          if (user) {
+            sessionStorage.setItem("currentUser", JSON.stringify(user));
+            alert("Login successful!");
+            window.location.href = "checkout.html";
+          } else {
+            alert("Invalid credentials!");
+          }
+        });
+    </script>
+  </head>
+  <body>
+    <div class="sec1">
+      <!-- nav -->
+      <nav class="navbar">
+        <h1>EasyHome</h1>
+
+        <div class="nav-container">
+          <button class="mobile-menu-btn" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <ul class="nav-links">
+            <li>
+              <a href="index.html">
+                <i class="fas fa-home"></i>
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="about.html">
+                <i class="fas fa-info-circle"></i>
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="contact.html">
+                <i class="fas fa-envelope"></i>
+                Contact
+              </a>
+            </li>
+            <li>
+              <a href="account.html">
+                <i class="fas fa-user"></i>
+                Account
+              </a>
+            </li>
+            <li>
+              <a href="checkout.html">
+                <i class="fas fa-shopping-cart"></i>
+                Cart
+                <span class="cart-count">0</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+    <!-- Login Form -->
+     <div class="form-container"> 
+        <h2><i class="fas fa-sign-in-alt"></i> Login</h2>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginEmail">Email</label>
+            <i class="fas fa-envelope input-icon"></i>
+            <input type="email" id="loginEmail" required />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" id="loginPassword" required />
+          </div>
+          <button type="submit">
+            Sign In <i class="fas fa-arrow-right"></i>
+          </button>
+        </form>
+      </div> 
+
+    <!-- Register Form -->
+     <div class="form-container"> 
+        <h2><i class="fas fa-user-plus"></i> Register</h2>
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="registerName">Full Name</label>
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" id="registerName" required />
+          </div>
+          <div class="form-group">
+            <label for="registerEmail">Email</label>
+            <i class="fas fa-envelope input-icon"></i>
+            <input type="email" id="registerEmail" required />
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">Password</label>
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" id="registerPassword" required />
+          </div>
+          <div class="form-group">
+            <label for="registerConfirmPassword">Confirm Password</label>
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" id="registerConfirmPassword" required />
+          </div>
+          <button type="submit">
+            Create Account <i class="fas fa-user-check"></i>
+          </button>
+        </form>
+      </div> 
+    </div>
+  <br>
+    <!-- footer -->
+    <footer class="footer">
+      <div class="footer-container">
+          <!-- Contact Information -->
+          <div class="footer-section contact-info">
+              <h4>Contact Us</h4>
+              <div class="address">
+                  <br>
+                  P.O. Box <br>
+                  Nairobi, Kenya
+              </div>
+              <div class="contact-details">
+                  07
+              </div>
+              <div class="email">
+                  info@easyhome.co.ke
+              </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-section">
+              <h4>Quick Links</h4>
+              <ul>
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="about.html">About Us</a></li>
+                  <li><a href="contact.html">Contact Us</a></li>
+                 
+              </ul>
+          </div>
+
+          <!-- Products -->
+          <div class="footer-section">
+              <h4>Our Products</h4>
+              <ul>
+                  <li><a href="#">Boards</a></li>
+                  <li><a href="#">Edging</a></li>
+                  <li><a href="#">Furniture Fittings</a></li>
+                  <li><a href="#">Flatpax Furniture</a></li>
+                  <li><a href="#">PVC Foil Wrap</a></li>
+                  <li><a href="#">Aluminium Systems</a></li>
+              </ul>
+          </div>
+      </div>
+
+      <div class="copyright">
+          © 2025 EASY HOME. All rights reserved.
+      </div>
+  </footer>
+  </body>
+</html>
+<style>
+  :root{
+    --gold: #fde910;
+    --black: #0f0616;
+    -white: #ffffff;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Arial", sans-serif;
+  }
+
+  body {
+    background-color: #ffffff;
+  }
+  .sec1 {
+    height: 15vh;
+    width: 100%;
+  }
+  .navbar {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(15, 6, 22, 0.1);
+    position: relative;
+    max-width: 100vw;
+    height: 100%;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .nav-container {
+    display: flex;
+
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: #0f0616;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    padding: 0.5rem 0;
+  }
+
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #fde910;
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #0f0616;
+    cursor: pointer;
+  }
+
+  .cart-count {
+    background: #fde910;
+    color: #0f0616;
+    padding: 0.2rem 0.5rem;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    margin-left: 0.3rem;
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      flex-direction: column;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 10px rgba(15, 6, 22, 0.1);
+      z-index: 100;
+    }
+
+    .nav-links.active {
+      display: flex;
+    }
+
+    .mobile-menu-btn {
+      display: block;
+    }
+
+    .nav-links a {
+      padding: 1rem 0;
+    }
+  }
+
+  .container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(15, 6, 22, 0.1);
+    width: 100%;
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 50px;
+    position: relative;
+    overflow: hidden;
+    margin: auto;
+    margin-top: 10px;
+  }
+
+  .container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    width: 2px;
+    background: #fde910;
+    transform: translateX(-50%);
+  }
+
+  .form-container {
+    padding: 20px;
+    position: relative;
+  }
+
+  h2 {
+    color: #0f0616;
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: 2em;
+    position: relative;
+    padding-bottom: 10px;
+  }
+
+  h2::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: #fde910;
+  }
+
+  .form-group {
+    margin-bottom: 25px;
+    position: relative;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #0f0616;
+    font-weight: 600;
+    font-size: 0.9em;
+  }
+
+  input {
+    width: 100%;
+    padding: 15px 15px 15px 40px;
+    border: 2px solid #0f0616;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  input:focus {
+    border-color: #fde910;
+    box-shadow: 0 0 8px rgba(253, 233, 16, 0.3);
+  }
+
+  .input-icon {
+    position: absolute;
+    left: 15px;
+    top: 38px;
+    color: #0f0616;
+    font-size: 1.1em;
+  }
+
+  button {
+    background-color: #fde910;
+    color: #0f0616;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    transition: all 0.3s ease;
+    font-size: 1.1em;
+    letter-spacing: 0.5px;
+  }
+
+  button:hover {
+    background-color: #f3d90f;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(253, 233, 16, 0.3);
+  }
+
+  .switch-form {
+    text-align: center;
+    margin-top: 25px;
+    color: #0f0616;
+    font-size: 0.95em;
+  }
+
+  .switch-form a {
+    color: #fde910;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+
+  .switch-form a:hover {
+    color: #f3d90f;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      grid-template-columns: 1fr;
+      padding: 30px;
+      gap: 20px;
+    }
+
+    .container::before {
+      display: none;
+    }
+
+    .form-container {
+      padding: 10px;
+    }
+
+    h2 {
+      margin-bottom: 30px;
+      font-size: 1.8em;
+    }
+  }
+  /* footer */
+  .footer {
+            background-color: var(--black);
+            color: white;
+            padding: 40px 20px;
+            font-family: 'Arial', sans-serif;
+          }
+          
+          .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-section {
+            margin-bottom: 25px;
+        }
+
+        .contact-info {
+            border-right: 2px solid var(--gold);
+            padding-right: 30px;
+        }
+
+        .footer h4 {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer li {
+            margin-bottom: 10px;
+        }
+
+        .footer a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--gold);
+        }
+
+        .address {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .contact-details::before {
+            content: "📞";
+            margin-right: 8px;
+        }
+
+        .email::before {
+            content: "📧";
+            margin-right: 8px;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(253, 233, 16, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                border-right: none;
+                padding-right: 0;
+                border-bottom: 2px solid var(--gold);
+                padding-bottom: 30px;
+            }
+        }
+</style>

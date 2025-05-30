@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EASYHOME</title>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 style="color: var(--gold);">🏠 Easyhome</h1>
+            <p>Filter through our products</p>
+        </header>
+
+        <div class="filter-section">
+            <div class="filter-group">
+                <input type="text" id="searchInput" placeholder="Search products...">
+            </div>
+            <div class="filter-group">
+                <select id="categorySelect">
+                    <option value="all">All Categories</option>
+                    <option value="Raw">Raw</option>
+                    <option value="White">White</option>
+                    <option value="Woodgrain">Woodgrain</option>
+                    <option value="Pattern">Pattern</option>
+                    <option value="OSB">OSB</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <select id="priceSelect">
+                    <option value="all">All Prices</option>
+                    <option value="50">Under $50</option>
+                    <option value="100">Under $100</option>
+                    <option value="200">Under $200</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+    </div>
+
+    <script>
+        const products = [
+            { 
+                name: "Raw Particleboard", 
+                category: "Raw", 
+                price: 45.99,
+                image: "https://picsum.photos/300/200?random=1",
+                sale: false
+            },
+            { 
+                name: "White Particleboard", 
+                category: "White", 
+                price: 55.99,
+                image: "https://picsum.photos/300/200?random=2",
+                sale: true
+            },
+            { 
+                name: "Woodgrain Particleboard", 
+                category: "Woodgrain", 
+                price: 65.99,
+                image: "https://picsum.photos/300/200?random=3",
+                sale: false
+            },
+            { 
+                name: "Pattern Particleboard", 
+                category: "Pattern", 
+                price: 75.99,
+                image: "https://picsum.photos/300/200?random=4",
+                sale: true
+            },
+            { 
+                name: "OSB Board", 
+                category: "OSB", 
+                price: 35.99,
+                image: "https://picsum.photos/300/200?random=5",
+                sale: false
+            },
+        ];
+
+        // DOM Elements
+        const searchInput = document.getElementById('searchInput');
+        const categorySelect = document.getElementById('categorySelect');
+        const priceSelect = document.getElementById('priceSelect');
+        const productGrid = document.getElementById('productGrid');
+
+        // Initial render
+        renderProducts(products);
+
+        function filterProducts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedCategory = categorySelect.value;
+            const selectedPrice = priceSelect.value;
+
+            const filtered = products.filter(product => {
+                const matchesSearch = product.name.toLowerCase().includes(searchTerm);
+                const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
+                const matchesPrice = selectedPrice === 'all' || product.price <= parseInt(selectedPrice);
+
+                return matchesSearch && matchesCategory && matchesPrice;
+            });
+
+            renderProducts(filtered);
+        }
+
+        function renderProducts(productsToRender) {
+            productGrid.innerHTML = productsToRender.length > 0 
+                ? productsToRender.map(product => `
+                    <div class="product-card">
+                        ${product.sale ? '<div style="position: absolute; background: var(--gold); color: var(--black); padding: 5px 10px; border-radius: 0 0 4px 0;">SALE</div>' : ''}
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-title">${product.name}</h3>
+                            <p>Category: ${product.category}</p>
+                            <p class="product-price">$${product.price.toFixed(2)}</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                `).join('')
+                : '<div class="no-results">No products found matching your criteria</div>';
+        }
+
+        // Event listeners
+        [searchInput, categorySelect, priceSelect].forEach(element => {
+            element.addEventListener('input', filterProducts);
+            element.addEventListener('change', filterProducts);
+        });
+
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('add-to-cart')) {
+                const productCard = e.target.closest('.product-card');
+                const productName = productCard.querySelector('.product-title').textContent;
+                alert(`Added ${productName} to cart!`);
+            }
+        });
+    </script>
+    <style>
+        /* Retained original CSS styles unchanged */
+        :root {
+            --gold: #fde910;
+            --black: #0f0616;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: var(--black);
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .filter-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        .filter-group {
+            flex: 1 1 200px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            background: var(--black);
+            border: 2px solid var(--gold);
+            color: white;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 1rem 0;
+        }
+
+        .product-card {
+            background: white;
+            color: var(--black);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid var(--gold);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .product-info {
+            padding: 1rem;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--black);
+        }
+
+        .product-price {
+            color: var(--gold);
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        .add-to-cart {
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+
+        .add-to-cart:hover {
+            opacity: 0.9;
+        }
+
+        .no-results {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--gold);
+            grid-column: 1 / -1;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>

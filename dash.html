@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- Dashboard Trigger -->
+<img src="your-image.png" alt="Dashboard" onclick="toggleDashboard()" style="cursor: pointer;">
+
+<!-- Dashboard Sidebar -->
+<div id="dashboard" style="
+    position: fixed;
+    top: 0;
+    right: -900px;
+    width: 400px;
+    height: 100vh;
+    background: #0f0616;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+    transition: 0.3s;
+    padding: 2rem;
+    color: white;
+    z-index: 1000;
+">
+    <button onclick="toggleDashboard()" style="
+        position: absolute;
+        left: -40px;
+        top: 20px;
+        background: #0f0616;
+        border: 2px solid #fde910;
+        color: #fde910;
+        padding: 5px 10px;
+        cursor: pointer;
+    ">×</button>
+
+    <div class="dashboard-content">
+        <h2 style="color: #fde910; border-bottom: 2px solid #fde910; padding-bottom: 1rem;">My Order</h2>
+        
+        <div class="dashboard-section" style="margin: 2rem 0;">
+            <h3 style="color: #fde910;">Checkout</h3>
+            <div id="selected-item" style="
+                padding: 1rem;
+                margin: 1rem 0;
+                border: 1px solid #fde910;
+                border-radius: 5px;
+            ">
+                <!-- Selected item will appear here -->
+            </div>
+        </div>
+
+        <div class="dashboard-section" style="margin: 2rem 0;">
+            <h3 style="color: #fde910;">Payments</h3>
+            <div class="payment-methods" style="
+                display: grid;
+                gap: 1rem;
+                margin-top: 1rem;
+            ">
+                <button class="payment-btn" style="
+                    background: transparent;
+                    border: 2px solid #fde910;
+                    color: white;
+                    padding: 1rem;
+                    cursor: pointer;
+                    transition: 0.2s;
+                ">Cash</button>
+                <button class="payment-btn" style="
+                    background: transparent;
+                    border: 2px solid #fde910;
+                    color: white;
+                    padding: 1rem;
+                    cursor: pointer;
+                    transition: 0.2s;
+                ">Datal</button>
+                <button class="payment-btn" style="
+                    background: transparent;
+                    border: 2px solid #fde910;
+                    color: white;
+                    padding: 1rem;
+                    cursor: pointer;
+                    transition: 0.2s;
+                ">Wizard</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleDashboard() {
+        const dashboard = document.getElementById('dashboard');
+        dashboard.style.right = dashboard.style.right === '0px' ? '-400px' : '0px';
+    }
+
+    // Example item click handler
+    function showItemInDashboard(itemName) {
+        const itemDisplay = document.getElementById('selected-item');
+        itemDisplay.innerHTML = `Selected: ${itemName}`;
+        toggleDashboard();
+    }
+
+    // Add hover effects to payment buttons
+    document.querySelectorAll('.payment-btn').forEach(btn => {
+        btn.addEventListener('mouseover', () => {
+            btn.style.background = 'rgba(253, 233, 16, 0.1)';
+            btn.style.transform = 'translateX(5px)';
+        });
+        
+        btn.addEventListener('mouseout', () => {
+            btn.style.background = 'transparent';
+            btn.style.transform = 'translateX(0)';
+        });
+    });
+</script>
+
+<style>
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        #dashboard {
+            width: 100vw;
+            right: -100vw;
+        }
+        
+        button[onclick="toggleDashboard()"] {
+            left: unset;
+            right: 20px;
+        }
+    }
+</style>
+</body>
+</html>
