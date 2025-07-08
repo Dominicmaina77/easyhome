@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product</title>
+    <link rel="stylesheet" href="test2.css">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -27,6 +28,8 @@
       // Initialize cart count
       updateCartCount();
     </script>
+    <!-- taskbar -->
+    <script src="taskbar4.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         // Get the filter parameter from URL
@@ -118,6 +121,114 @@
           </ul>
         </div>
       </nav>
+    </section>
+       <!-- Mobile toggle button -->
+       <button class="mobile-toggle" id="mobileToggle">
+        ☰
+    </button>
+    <!-- Mobile overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <section class="task" id="navigation">
+     
+
+      <div class="taskbar">
+        <div class="category">
+          <h6>BOARDS</h6>
+          
+          <ul class="subcategory1">
+            <li>
+              <a href="/product.html?filter=Particleboards">Particleboards</a>
+            </li>
+            <li><a href="/product.html?filter=Highgloss">Highgloss</a></li>
+            <li><a href="product.html?filter=MDF&OSB">MDF&OSB</a></li>
+          </ul>
+        </div>
+       
+        <div class="category">
+          <h6> EDGINGS</h6>
+          <ul class="subcategory2">
+            <li>
+              <a href="/product.html?filter= HighGloss Edging"
+                >HighGloss Edging</a
+              >
+            </li>
+            <li class="drop1">
+              <a href="/product.html?filter=Plain Edging">Plain Edging</a>
+            
+            </li>
+            <li class="drop2">
+              <a href="/product.html?filter=Woodgrain Edging"
+                >Woodgrain Edging</a
+              >
+             
+            </li>
+            <li>
+              <a href="/product.html?filter=Edging Pattern">Edging Pattern</a>
+            </li>
+          </ul>
+        </div>
+        <div class="category">
+          <h6>PVC FOILS WRAP</h6>
+          <ul class="subcategory3">
+            <li>
+              <a href="/product.html?filter=Plain">Plain</a>
+            </li>
+            <li class="drop1">
+              <a href="/product.html?filter=Woodgrain">Woodgrain</a>
+             
+            </li>
+            <li>
+              <a href="/product.html?filter=Petro blue ">Petro blue</a>
+            </li>
+            <li><a href="/product.html?filter=Dark grey">Dark grey</a></li>
+            <li><a href="/product.html?filter=White ">White</a></li>
+            <li>
+              <a href="/product.html?filter=Metallic green ">Metallic green</a>
+            </li>
+            <li>
+              <a href="/product.html?filter=Metallic grey ">Metallic grey</a>
+            </li>
+          </ul>
+        </div>
+        <div class="category">
+          <h6>ACCESSORIES</h6>
+          <ul class="subcategory4">
+            <li class="drop1">
+              <a href="/product.html?filter=Runners">Runners</a>
+             
+            </li>
+            <li><a href="/product.html?filter=Hinges">Hinges</a></li>
+            <li class="drop2">
+              <a href="/product.html?filter=Screws">Screws</a>
+             
+            </li>
+            <li><a href="/product.html?filter=Connectors">Nail Anchors</a></li>
+            <li><a href="/product.html?filter=Sliding">Wardrobe rails</a></li>
+            <li><a href="/product.html?filter=Supports">Plith and cabinet legs </a></li>
+          </ul>
+        </div>
+        <div class="category">
+          <h6>ALUMINIUM SYSTEM & HANDLES</h6>
+          <ul class="subcategory5">
+            <li class="drop1">
+              <a href="/product.html?filter=Handles"> Handles</a>
+             
+            </li>
+            <li >
+              <a href="/product.html?filter=Aluminium Door Systems"
+                >Aluminium Door Systems</a
+              >
+            </li>
+            <li class="drop2">
+              <a href="/product.html?filter=Gola & Gola Accessories"
+                >Gola & Gola Accessories</a
+              >
+             
+            </li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <!-- body -->

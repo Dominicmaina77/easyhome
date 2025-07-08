@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - Ecommerce</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom Colors */
+        :root {
+            --primary: #0f0616;
+            --accent: #fde910;
+            --text: white;
+            --card-bg: rgba(30, 20, 45, 0.8);
+            --input-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Reset Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", "Arial", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary), #1a0a2e);
+            color: var(--text);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(253, 233, 16, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(78, 154, 241, 0.1) 0%, transparent 20%);
+            z-index: -1;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--accent);
+            font-size: 24px;
+            cursor: pointer;
+            position: fixed;
+            top: 25px;
+            left: 15px;
+            z-index: 1000;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: var(--primary);
+            padding: 20px;
+            position: fixed;
+            border-right: 2px solid var(--accent);
+            box-shadow: 0 0 30px rgba(253, 233, 16, 0.1);
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-header {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(253, 233, 16, 0.3);
+        }
+
+        .sidebar-header i {
+            font-size: 28px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            padding: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-menu li:hover, .sidebar-menu li.active {
+            background: rgba(253, 233, 16, 0.1);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 30px;
+            min-height: 100vh;
+            transition: margin 0.3s ease;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dashboard-header h1 {
+            font-size: 28px;
+            background: linear-gradient(90deg, var(--accent), #ff9800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(253, 233, 16, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(253, 233, 16, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--accent);
+        }
+
+        .stat-info h3 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .stat-info p {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) transparent;
+        }
+
+        .tab-navigation::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .tab-navigation::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 3px;
+        }
+
+        .tab-button {
+            padding: 15px 25px;
+            background: transparent;
+            border: none;
+            color: #aaa;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .tab-button.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Form Styling */
+        .form-section {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            margin: 0 auto;
+            border: 1px solid rgba(253, 233, 16, 0.2);
+        }
+
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-header h2 {
+            font-size: 22px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--accent);
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            background: var(--input-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(253, 233, 16, 0.2);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: #ffdf00;
+            box-shadow: 0 0 15px rgba(253, 233, 16, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-outline:hover {
+            background: rgba(253, 233, 16, 0.1);
+        }
+
+        .btn-danger {
+            background: #ff4757;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #ff3838;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            justify-content: flex-end;
+        }
+
+        /* Category/Subcategory List */
+        .category-list {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .category-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .category-item:last-child {
+            border-bottom: none;
+        }
+
+        .category-name {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .category-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .main-content {
+                padding: 25px;
+            }
+            
+            .dashboard-header h1 {
+                font-size: 24px;
+            }
+            
+            .stat-card {
+                padding: 15px;
+            }
+            
+            .stat-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+            
+            .stat-info h3 {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 20px 15px;
+            }
+            
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .dashboard-header h1 {
+                font-size: 22px;
+                margin-top: 15px;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .tab-navigation {
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+            
+            .tab-button {
+                padding: 12px 18px;
+                font-size: 14px;
+            }
+            
+            .form-section {
+                padding: 20px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .category-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .category-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-header h1 {
+                font-size: 20px;
+            }
+            
+            .stat-info h3 {
+                font-size: 18px;
+            }
+            
+            .stat-info p {
+                font-size: 13px;
+            }
+            
+            .form-header h2 {
+                font-size: 18px;
+            }
+            
+            .category-name {
+                font-size: 15px;
+            }
+            
+            .btn-sm {
+                padding: 7px 12px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-cubes"></i>
+            <span>Admin Dashboard</span>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="active"><i class="fas fa-th-large"></i> <span>Dashboard</span></li>
+            <li><i class="fas fa-layer-group"></i> <span>Categories</span></li>
+            <li><i class="fas fa-sitemap"></i> <span>Subcategories</span></li>
+            <li><i class="fas fa-box"></i> <span>Products</span></li>
+            <li><i class="fas fa-chart-line"></i> <span>Analytics</span></li>
+            <li><i class="fas fa-cog"></i> <span>Settings</span></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="dashboard-header">
+            <h1><i class="fas fa-box"></i> Category & Product Management</h1>
+            <div class="user-info">
+                <span>Admin User</span>
+                <i class="fas fa-user-circle" style="margin-left: 10px; font-size: 24px;"></i>
+            </div>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="categoryCount">5</h3>
+                    <p>Categories</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-tags"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="subcategoryCount">24</h3>
+                    <p>Subcategories</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-boxes"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="productCount">142</h3>
+                    <p>Total Products</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>1,248</h3>
+                    <p>Monthly Orders</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-button active" data-tab="categories">
+                <i class="fas fa-layer-group"></i> Categories
+            </button>
+            <button class="tab-button" data-tab="subcategories">
+                <i class="fas fa-tags"></i> Subcategories
+            </button>
+            <button class="tab-button" data-tab="products">
+                <i class="fas fa-box"></i> Products
+            </button>
+        </div>
+
+        <!-- Categories Tab -->
+        <div class="tab-content active" id="categories">
+            <div class="form-section">
+                <div class="form-header">
+                    <h2><i class="fas fa-layer-group"></i> Add New Category</h2>
+                </div>
+                <form id="categoryForm">
+                    <div class="form-group">
+                        <label for="categoryName">Category Name</label>
+                        <input type="text" id="categoryName" required placeholder="Enter category name">
+                    </div>
+                    <div class="action-buttons">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add Category
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="category-list">
+                <h3 style="margin-bottom: 20px; color: var(--accent);">Existing Categories</h3>
+                <div id="categoryList"></div>
+            </div>
+        </div>
+
+        <!-- Subcategories Tab -->
+        <div class="tab-content" id="subcategories">
+            <div class="form-section">
+                <div class="form-header">
+                    <h2><i class="fas fa-tags"></i> Add New Subcategory</h2>
+                </div>
+                <form id="subcategoryForm">
+                    <div class="form-group">
+                        <label for="subcategoryCategory">Parent Category</label>
+                        <select id="subcategoryCategory" required>
+                            <option value="">Select Category</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="subcategoryName">Subcategory Name</label>
+                        <input type="text" id="subcategoryName" required placeholder="Enter subcategory name">
+                    </div>
+                    <div class="action-buttons">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Add Subcategory
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="category-list">
+                <h3 style="margin-bottom: 20px; color: var(--accent);">Existing Subcategories</h3>
+                <div id="subcategoryList"></div>
+            </div>
+        </div>
+
+        <!-- Products Tab -->
+        <div class="tab-content" id="products">
+            <div class="form-section">
+                <div class="form-header">
+                    <h2><i class="fas fa-plus-circle"></i> Add New Product</h2>
+                </div>
+                
+                <form id="productForm">
+                    <div class="form-group">
+                        <label for="productCategory">Category</label>
+                        <select id="productCategory" required>
+                            <option value="">Select Category</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productSubcategory">Subcategory</label>
+                        <select id="productSubcategory" required>
+                            <option value="">Select Subcategory</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productName">Product Name</label>
+                        <input type="text" id="productName" required placeholder="Enter product name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productPrice">Price ($)</label>
+                        <input type="number" id="productPrice" required placeholder="Enter price" min="0" step="0.01">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productDescription">Description</label>
+                        <textarea id="productDescription" rows="3" placeholder="Enter product description"></textarea>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Product
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Success!</span>
+    </div>
+
+    <script>
+        // Initialize taskbar structure (matching your HTML structure)
+        const initializeTaskbarStructure = () => {
+            const defaultTaskbar = {
+                'BOARDS': ['Particleboards', 'Highgloss', 'MDF&OSB'],
+                'EDGINGS': ['HighGloss Edging', 'Plain Edging', 'Woodgrain Edging', 'Edging Pattern'],
+                'PVC FOILS WRAP': ['Plain', 'Woodgrain', 'Petro blue', 'Dark grey', 'White', 'Metallic green', 'Metallic grey'],
+                'ACCESSORIES': ['Runners', 'Hinges', 'Screws', 'Nail Anchors', 'Wardrobe rails', 'Plith and cabinet legs'],
+                'ALUMINIUM SYSTEM & HANDLES': ['Handles', 'Aluminium Door Systems', 'Gola & Gola Accessories']
+            };
+
+            if (!localStorage.getItem('taskbarStructure')) {
+                localStorage.setItem('taskbarStructure', JSON.stringify(defaultTaskbar));
+            }
+            return JSON.parse(localStorage.getItem('taskbarStructure'));
+        };
+
+        // Function to update taskbar HTML file
+        const updateTaskbarHTML = (taskbarStructure) => {
+            let taskbarHTML = '';
+            let subcategoryIndex = 1;
+            
+            Object.keys(taskbarStructure).forEach(category => {
+                taskbarHTML += `
+                <div class="category">
+                    <h6>${category}</h6>
+                    <ul class="subcategory${subcategoryIndex}">`;
+                
+                taskbarStructure[category].forEach(subcategory => {
+                    taskbarHTML += `
+                        <li>
+                            <a href="/product.html?filter=${encodeURIComponent(subcategory)}">${subcategory}</a>
+                        </li>`;
+                });
+                
+                taskbarHTML += `
+                    </ul>
+                </div>`;
+                
+                subcategoryIndex++;
+            });
+            
+            // Here you would typically send this to your server to update the actual HTML file
+            // For now, we'll just console.log it
+            console.log('Updated Taskbar HTML:', taskbarHTML);
+            
+            // Show success message
+            showToast('Taskbar structure updated successfully!');
+        };
+
+        // Show toast notification
+        const showToast = (message) => {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        };
+
+        // Tab functionality
+        const initializeTabs = () => {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabName = button.dataset.tab;
+                    
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked button and corresponding content
+                    button.classList.add('active');
+                    document.getElementById(tabName).classList.add('active');
+                });
+            });
+        };
+
+        // Category management
+        const initializeCategoryManagement = () => {
+            const categoryForm = document.getElementById('categoryForm');
+            const categoryList = document.getElementById('categoryList');
+            
+            categoryForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const categoryName = document.getElementById('categoryName').value.trim().toUpperCase();
+                
+                if (categoryName) {
+                    const taskbarStructure = JSON.parse(localStorage.getItem('taskbarStructure'));
+                    
+                    if (!taskbarStructure[categoryName]) {
+                        taskbarStructure[categoryName] = [];
+                        localStorage.setItem('taskbarStructure', JSON.stringify(taskbarStructure));
+                        
+                        updateTaskbarHTML(taskbarStructure);
+                        renderCategories();
+                        updateDropdowns();
+                        updateStats();
+                        
+                        document.getElementById('categoryName').value = '';
+                        showToast('Category added successfully!');
+                    } else {
+                        showToast('Category already exists!');
+                    }
+                }
+            });
+            
+            const renderCategories = () => {
+                const taskbarStructure = JSON.parse(localStorage.getItem('taskbarStructure'));
+                categoryList.innerHTML = '';
+                
+                Object.keys(taskbarStructure).forEach(category => {
+                    const categoryItem = document.createElement('div');
+                    categoryItem.className = 'category-item';
+                    categoryItem.innerHTML = `
+                        <span class="category-name">${category}</span>
+                        <div class="category-actions">
+                            <button class="btn btn-danger btn-sm" onclick="deleteCategory('${category}')">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </div>
+                    `;
+                    categoryList.appendChild(categoryItem);
+                });
+            };
+            
+            window.deleteCategory = (categoryName) => {
+                if (confirm(`Are you sure you want to delete the category "${categoryName}" and all its subcategories?`)) {
+                    const taskbarStructure = JSON.parse(localStorage.getItem('taskbarStructure'));
+                    delete taskbarStructure[categoryName];
+                    localStorage.setItem('taskbarStructure', JSON.stringify(taskbarStructure));
+                    
+                    updateTaskbarHTML(taskbarStructure);
+                    renderCategories();
+                    updateDropdowns();
+                    updateStats();
+                    
+                    showToast('Category deleted successfully!');
+                }
+            };
+            
+            renderCategories();
+        };
+
+        // Subcategory management
+        const initializeSubcategoryManagement = () => {
+            const subcategoryForm = document.getElementById('subcategoryForm');
+            const subcategoryList = document.getElementById('subcategoryList');
+            
+            subcategoryForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const categoryName = document.getElementById('subcategoryCategory').value;
+                const subcategoryName = document.getElementById('subcategoryName').value.trim();
+                
+                if (categoryName && subcategoryName) {
+                    const taskbarStructure = JSON.parse(localStorage.getItem('taskbarStructure'));
+                    
+                    if (!taskbarStructure[categoryName].includes(subcategoryName)) {
+                        taskbarStructure[categoryName].push(subcategoryName);
+                        localStorage.setItem('taskbarStructure', JSON.stringify(taskbarStructure));
+                        
+                        updateTaskbarHTML(taskbarStructure);
+                        renderSubcategories();
+                        updateDropdowns();
+                        updateStats();
+                        
+                        document.getElementById('subcategoryName').value = '';
+                        showToast('Subcategory added successfully!');
+                    } else {
+                        showToast('Subcategory already exists in this category!');
+                    }
+                }
+            });
+            
+            const renderSubcategories = () => {
+                const taskbarStructure = JSON.parse(localStorage.getItem('taskbarStructure'));
+                subcategoryList.innerHTML = '';
+                
+                Object.keys(taskbarStructure).forEach(category => {
+                    taskbarStructure[category].forEach(subcategory => {
+                        const subcategoryItem = document.createElement('div');
+                        subcategoryItem.className = 'category-item';
+                        subcategoryItem.innerHTML = `
+                            <span class="category-name">${subcategory} <small style="color: #aaa;">(${category})</small></span>
+                            <div class="category-actions">
+                                <button class="btn btn-danger btn-sm" onclick="deleteSubcategory('${category}', '${subcategory}')">
+                                    <i class="fas fa-trash"></i> Delete
+                                </button>
+                            </div>
+                        `;
+                        subcategoryList.appendChild(subcategoryItem);
+                    });
+                });
+            };
+            
+            window.deleteSubcategory = (categoryName, subcategoryName) => {
+                if (confirm(`Are you sure you want to delete the subcategory "${subcategoryName}"?`)) {
+                    const taskbarStructure = JSON.parse(localStorage.getItem('taskbarStructure'));
+                    const index = taskbarStructure[categoryName].indexOf(subcategoryName);
+                    if (index > -1) {
+                        taskbarStructure[categoryName].splice(index, 1);
+                        localStorage.setItem('taskbarStructure', JSON.stringify(taskbarStructure));
+                        
+                        updateTaskbarHTML(taskbarStructure);
+                        renderSubcategories();
+                        updateDropdowns();
+                        updateStats();
+                        
+                        showToast('Subcategory deleted successfully!');
+                    }
+                }
+            };
+            
+            renderSubcategories();
+        };
+
+        // Update dropdowns
+        const updateDropdowns = () => {
+            const taskbarStructure = JSON.parse(localStorage.getItem('taskbarStructure'));
+            
+            // Update category dropdowns
+            const categorySelects = document.querySelectorAll('#subcategoryCategory, #productCategory');
+            categorySelects.forEach(select => {
+                const currentValue = select.value;
+                select.innerHTML = '<option value="">Select Category</option>';
+                
+                Object.keys(taskbarStructure).forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category;
+                    option.textContent = category;
+                    select.appendChild(option);
+                });
+                
+                select.value = currentValue;
+            });
+            
+            // Update subcategory dropdown for products
+            const productCategorySelect = document.getElementById('productCategory');
+            const productSubcategorySelect = document.getElementById('productSubcategory');
+            
+            productCategorySelect.addEventListener('change', () => {
+                const selectedCategory = productCategorySelect.value;
+                productSubcategorySelect.innerHTML = '<option value="">Select Subcategory</option>';
+                
+                if (selectedCategory && taskbarStructure[selectedCategory]) {
+                    taskbarStructure[selectedCategory].forEach(subcategory => {
+                        const option = document.createElement('option');
+                        option.value = subcategory;
+                        option.textContent = subcategory;
+                        productSubcategorySelect.appendChild(option);
+                    });
+                }
+            });
+        };
+
+        // Update stats
+        const updateStats = () => {
+            const taskbarStructure = JSON.parse(localStorage.getItem('taskbarStructure'));
+            const products = JSON.parse(localStorage.getItem('products') || '[]');
+            
+            const categoryCount = Object.keys(taskbarStructure).length;
+            const subcategoryCount = Object.values(taskbarStructure).reduce((total, subcategories) => total + subcategories.length, 0);
+            const productCount = products.length;
+            
+            document.getElementById('categoryCount').textContent = categoryCount;
+            document.getElementById('subcategoryCount').textContent = subcategoryCount;
+            document.getElementById('productCount').textContent = productCount;
+        };
+
+        // Product management
+        const initializeProductManagement = () => {
+            const productForm = document.getElementById('productForm');
+            
+            productForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const product = {
+                    id: Date.now(),
+                    name: document.getElementById('productName').value,
+                    price: parseFloat(document.getElementById('productPrice').value).toFixed(2),
+                    category: document.getElementById('productCategory').value,
+                    subcategory: document.getElementById('productSubcategory').value,
+                    description: document.getElementById('productDescription').value
+                };
+                
+                const products = JSON.parse(localStorage.getItem('products') || '[]');
+                products.push(product);
+                localStorage.setItem('products', JSON.stringify(products));
+                
+                productForm.reset();
+                updateStats();
+                showToast('Product added successfully!');
+            });
+        };
+
+        // Mobile menu toggle
+        const initializeMobileMenu = () => {
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+            });
+        };
+
+        // Initialize all components
+        const init = () => {
+            initializeTaskbarStructure();
+            initializeTabs();
+            initializeCategoryManagement();
+            initializeSubcategoryManagement();
+            initializeProductManagement();
+            initializeMobileMenu();
+            updateDropdowns();
+            updateStats();
+        };
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
