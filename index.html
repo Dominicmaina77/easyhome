@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EasyHome</title>
-    <link rel="websiteicon" href="" />
+    <link rel="stylesheet" href="test2.css">
+    <link rel="website icon" href="" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -53,11 +54,76 @@
         }
       }
     </script>
+    <!-- taskbar -->
+    <!-- <script>
+      // Mobile navigation toggle functionality
+      const mobileToggle = document.getElementById('mobileToggle');
+      const navigation = document.getElementById('navigation');
+      const mobileOverlay = document.getElementById('mobileOverlay');
+
+      // Toggle mobile navigation
+      mobileToggle.addEventListener('click', function() {
+          navigation.classList.toggle('active');
+          mobileOverlay.classList.toggle('active');
+          
+          // Change icon based on state
+          if (navigation.classList.contains('active')) {
+              mobileToggle.innerHTML = '✕';
+          } else {
+              mobileToggle.innerHTML = '☰';
+          }
+      });
+
+      // Close navigation when clicking overlay
+      mobileOverlay.addEventListener('click', function() {
+          navigation.classList.remove('active');
+          mobileOverlay.classList.remove('active');
+          mobileToggle.innerHTML = '☰';
+      });
+
+      // Close navigation when clicking a link (mobile only)
+      document.querySelectorAll('.subcategory1 a, .subcategory2 a, .subcategory3 a, .subcategory4 a, .subcategory5 a').forEach(function(link) {
+          link.addEventListener('click', function() {
+              if (window.innerWidth < 768) {
+                  navigation.classList.remove('active');
+                  mobileOverlay.classList.remove('active');
+                  mobileToggle.innerHTML = '☰';
+              }
+          });
+      });
+
+      // Handle window resize
+      window.addEventListener('resize', function() {
+          if (window.innerWidth >= 768) {
+              navigation.classList.remove('active');
+              mobileOverlay.classList.remove('active');
+              mobileToggle.innerHTML = '☰';
+          }
+      });
+
+      // Enhanced mobile dropdown functionality
+      if (window.innerWidth < 768) {
+          document.querySelectorAll('.category h6').forEach(function(header) {
+              header.addEventListener('click', function() {
+                  const subcategory = this.nextElementSibling;
+                  if (subcategory.style.display === 'flex') {
+                      subcategory.style.display = 'none';
+                  } else {
+                      // Close all other subcategories
+                      document.querySelectorAll('.subcategory1, .subcategory2, .subcategory3, .subcategory4, .subcategory5').forEach(function(sub) {
+                          sub.style.display = 'none';
+                      });
+                      subcategory.style.display = 'flex';
+                  }
+              });
+          });
+      }
+  </script> -->
   </head>
   <body>
     <section class="sec1">
       <nav class="navbar">
-        <img src="/img/logoicon.png" alt="" style="height: 100px; ">
+        <img src="/img/logoicon.png" alt="" style="height: 100px" />
         <h1>EasyHome</h1>
 
         <div class="nav-container">
@@ -84,128 +150,155 @@
                 Contact
               </a>
             </li>
-           
           </ul>
         </div>
       </nav>
     </section>
 
-    <section class="task">
+      <!-- Mobile toggle button -->
+      <button class="mobile-toggle" id="mobileToggle">
+        ☰
+    </button>
+    <!-- Mobile overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <section class="task" id="navigation">
+     
+
       <div class="taskbar">
         <div class="category">
-          <h6>PARTICLEBOARD & OSB</h6>
-          <ul class="subcategory">
-            <li><a href="/product.html?filter=Raw">Raw</a></li>
-            <li><a href="/product.html?filter=White">White</a></li>
-            <li><a href="/product.html?filter=Woodgrain">Woodgrain</a></li>
-            <li><a href="product.html?filter=Pattern">Pattern</a></li>
-            <li><a href="product.html?filter=OSB">OSB</a></li>
+          <h6>BOARDS</h6>
+          <ul class="subcategory1">
+            <li>
+              <a href="/product.html?filter=Particleboards">Particleboards</a>
+            </li>
+            <li><a href="/product.html?filter=Highgloss">Highgloss</a></li>
+            <li><a href="product.html?filter=MDF&OSB">MDF&OSB</a></li>
           </ul>
         </div>
+       
         <div class="category">
-          <h6>MDF BOARDS & MDF BACKERS</h6>
-          <ul class="subcategory">
-            <li><a href="/product.html?filter=Raw">Raw</a></li>
-            <li><a href="/product.html?filter=White">White</a></li>
-          </ul>
-        </div>
-        <div class="category">
-          <h6>MATT GLOSS & TEXTURES</h6>
-          <ul class="subcategory">
-            <li><a href="/product.html?filter=Gloss White">Gloss White</a></li>
+          <h6>EDGINGS</h6>
+          <ul class="subcategory2">
             <li>
-              <a href="/product.html?filter=Gloss Woodgrain">Gloss Woodgrain</a>
-            </li>
-            <li><a href="/product.html?filter=Gloss Plain">Gloss Plain</a></li>
-            <li>
-              <a href="/product.html?filter=Gloss Pattern">Gloss Pattern</a>
-            </li>
-            <li><a href="/product.html?filter=Matt White">Matt White</a></li>
-            <li><a href="/product.html?filter=Matt Plain">Matt Plain</a></li>
-            <li>
-              <a href="/product.html?filter=Matt Pattern">Matt Pattern</a>
-            </li>
-            <li>
-              <a href="/product.html?filter=Texture Mosaico">Texture Mosaico</a>
-            </li>
-            <li>
-              <a href="/product.html?filter=Texture Prima Fiore"
-                >Texture Prima Fiore</a
+              <a href="/product.html?filter= HighGloss Edging"
+                >HighGloss Edging</a
               >
             </li>
-          </ul>
-        </div>
-        <div class="category">
-          <h6>EDGINGS & COVER CAPS</h6>
-          <ul class="subcategory">
-            <li>
-              <a href="/product.html?filter=Edging White">Edging White</a>
+            <li class="drop1">
+              <a href="/product.html?filter=Plain Edging">Plain Edging</a>
+              <!-- <ul class="dropedge">
+                <li><a href="/product.html?filter=Greg">Greg</a></li>
+                <li><a href="/product.html?filter=white">white</a></li>
+                <li><a href="/product.html?filter=Muger">Muger</a></li>
+                <li><a href="/product.html?filter=Capuchino">Capuchino</a></li>
+              </ul> -->
             </li>
-            <li>
-              <a href="/product.html?filter=Edging Plain">Edging Plain</a>
-            </li>
-            <li>
-              <a href="/product.html?filter=Edging Woodgrain"
-                >Edging Woodgrain</a
+            <li class="drop2">
+              <a href="/product.html?filter=Woodgrain Edging"
+                >Woodgrain Edging</a
               >
+              <!-- <ul class="dropwood">
+                <li>
+                  <a href="/product.html?filter=Hardwood Cherry"
+                    >Hardwood Cherry</a
+                  >
+                </li>
+                <li><a href="/product.html?filter=Teak">Teak</a></li>
+                <li>
+                  <a href="/product.html?filter=White Cherry">White cherry</a>
+                </li>
+                <li>
+                  <a href="/product.html?filter=Brown Cherry">Brown Cherry</a>
+                </li>
+                <li><a href="/product.html?filter=Esperanza">Esperanza</a></li>
+              </ul> -->
             </li>
             <li>
               <a href="/product.html?filter=Edging Pattern">Edging Pattern</a>
-            </li>
-            <li>
-              <a href="/product.html?filter=Cover Caps White"
-                >Cover Caps White</a
-              >
-            </li>
-            <li>
-              <a href="/product.html?filter=Cover Caps Plain"
-                >Cover Caps Plain</a
-              >
-            </li>
-            <li>
-              <a href="/product.html?filter=Cover Caps Pattern"
-                >Cover Caps Pattern</a
-              >
-            </li>
-            <li>
-              <a href="/product.html?filter=Cover Caps Woodgrain"
-                >Cover Caps Woodgrain</a
-              >
             </li>
           </ul>
         </div>
         <div class="category">
           <h6>PVC FOILS WRAP</h6>
-          <ul class="subcategory">
+          <ul class="subcategory3">
             <li>
-              <a href="/product.html?filter=Pvc Foil Wrap">Pvc Foil Wrap</a>
+              <a href="/product.html?filter=Plain">Plain</a>
+            </li>
+            <li class="drop1">
+              <a href="/product.html?filter=Woodgrain">Woodgrain</a>
+              <!-- <ul class="dropwood">
+                <li>
+                  <a href="/product.html?filter=Havard Cherry">Havard Cherry</a>
+                </li>
+                <li>
+                  <a href="/product.html?filter=Brook Hero">Brook Hero</a>
+                </li>
+                <li><a href="/product.html?filter=Linen">Linen</a></li>
+                <li><a href="/product.html?filter=Amati">Amati</a></li>
+              </ul> -->
+            </li>
+            <li>
+              <a href="/product.html?filter=Petro blue ">Petro blue</a>
+            </li>
+            <li><a href="/product.html?filter=Dark grey">Dark grey</a></li>
+            <li><a href="/product.html?filter=White ">White</a></li>
+            <li>
+              <a href="/product.html?filter=Metallic green ">Metallic green</a>
+            </li>
+            <li>
+              <a href="/product.html?filter=Metallic grey ">Metallic grey</a>
             </li>
           </ul>
         </div>
         <div class="category">
-          <h6>FURNITURE FITTINGS</h6>
-          <ul class="subcategory">
-            <li><a href="/product.html?filter=Handles">Handles</a></li>
+          <h6>ACCESSORIES</h6>
+          <ul class="subcategory4">
+            <li class="drop1">
+              <a href="/product.html?filter=Runners">Runners</a>
+              <!-- <ul class="droprunn">
+                <li><a href="/product.html?filter=Runners">45mm</a></li>
+              </ul> -->
+            </li>
             <li><a href="/product.html?filter=Hinges">Hinges</a></li>
-            <li><a href="/product.html?filter=Runners">Runners</a></li>
-            <li><a href="/product.html?filter=Connectors">Conectors</a></li>
-            <li><a href="/product.html?filter=Sliding">Sliding</a></li>
-            <li>
-              <a href="/product.html?filter=Legs & Skirting"
-                >Legs & Skirting
-              </a>
+            <li class="drop2">
+              <a href="/product.html?filter=Screws">Screws</a>
+              <!-- <ul class="dropscrew">
+                <li><a href="/product.html?filter=Screws">4mm by 50mm</a></li>
+                <li><a href="/product.html?filter=Screws">4mm by 45mm</a></li>
+                <li><a href="/product.html?filter=Screws">4mm by 30mm</a></li>
+                <li><a href="/product.html?filter=Screws">3.5mm by 16mm</a></li>
+              </ul> -->
             </li>
-            <li><a href="/product.html?filter=Supports">Supports </a></li>
-            <li><a href="/product.html?filter=Accessories">Accessories </a></li>
+            <li><a href="/product.html?filter=Connectors">Nail Anchors</a></li>
+            <li><a href="/product.html?filter=Sliding">Wardrobe rails</a></li>
+            <li><a href="/product.html?filter=Supports">Plith and cabinet legs </a></li>
           </ul>
         </div>
         <div class="category">
-          <h6>ALUMINIUM</h6>
-          <ul class="subcategory">
-            <li>
-              <a href="/product.html?filter=Aluminium Handles"
-                >Aluminium Handles</a
+          <h6>ALUMINIUM SYSTEM & HANDLES</h6>
+          <ul class="subcategory5">
+            <li class="drop1">
+              <a href="/product.html?filter=Handles"> Handles</a>
+              <!-- <ul class="drophandle">
+                <li>
+                  <a href="/product.html?filter=C&LHandles">C&LHandles</a>
+                </li>
+              </ul> -->
+            </li>
+            <li >
+              <a href="/product.html?filter=Aluminium Door Systems"
+                >Aluminium Door Systems</a
               >
+            </li>
+            <li class="drop2">
+              <a href="/product.html?filter=Gola & Gola Accessories"
+                >Gola & Gola Accessories</a
+              >
+              <!-- <ul class="dropgola">
+                <li><a href="/product.html?filter=Gola & Gola Accessories">J-Gola Profile 4.1m</a></li>
+                <li><a href="/product.html?filter=Gola & Gola Accessories">C-Gola Profile 4.1m</a></li>
+              </ul> -->
             </li>
           </ul>
         </div>
@@ -295,7 +388,9 @@
               class="fas fa-kitchen-set"
               style="color: black; font-size: 2.5rem; margin-bottom: 1rem"
             ></i>
-            <h3 style="color: lightslategray; margin: 0.5rem 0">Custom Kitchens</h3>
+            <h3 style="color: lightslategray; margin: 0.5rem 0">
+              Custom Kitchens
+            </h3>
           </div>
 
           <div class="service-item" style="text-align: center; padding: 1.5rem">
@@ -303,7 +398,9 @@
               class="fas fa-cube"
               style="color: black; font-size: 2.5rem; margin-bottom: 1rem"
             ></i>
-            <h3 style="color: lightslategray; margin: 0.5rem 0">Smart Cupboards</h3>
+            <h3 style="color: lightslategray; margin: 0.5rem 0">
+              Smart Cupboards
+            </h3>
           </div>
 
           <div class="service-item" style="text-align: center; padding: 1.5rem">
@@ -311,7 +408,9 @@
               class="fas fa-draw-polygon"
               style="color: black; font-size: 2.5rem; margin-bottom: 1rem"
             ></i>
-            <h3 style="color: lightslategray; margin: 0.5rem 0">Drawer Systems</h3>
+            <h3 style="color: lightslategray; margin: 0.5rem 0">
+              Drawer Systems
+            </h3>
           </div>
         </div>
       </div>
@@ -320,22 +419,31 @@
     <section class="services">
       <div class="sub-services">
         <div class="service-card">
-          <i class="fa-solid fa-screwdriver-wrench " style="font-size: 50px; color: #2d2f3e;"></i>
+          <i
+            class="fa-solid fa-screwdriver-wrench"
+            style="font-size: 50px; color: #2d2f3e"
+          ></i>
           <h2>Quality Products</h2>
-          <p>Quality Products  Without Compromise </p>
-
+          <p>Quality Products Without Compromise</p>
         </div>
         <div class="service-card">
-          <i class="fa-solid fa-money-bills" style="font-size: 50px; color: #2d2f3e;"></i>
+          <i
+            class="fa-solid fa-money-bills"
+            style="font-size: 50px; color: #2d2f3e"
+          ></i>
           <h2>Affordable Prices</h2>
           <p>Affordable Prices on our products</p>
-
         </div>
         <div class="service-card">
-          <i class="fa-solid fa-cart-shopping" style="font-size: 50px; color: #2d2f3e;"></i>
+          <i
+            class="fa-solid fa-cart-shopping"
+            style="font-size: 50px; color: #2d2f3e"
+          ></i>
           <h2>Authentic</h2>
-          <p>We uphold authenticity <br> Real Value Real Products </p>
-
+          <p>
+            We uphold authenticity <br />
+            Real Value Real Products
+          </p>
         </div>
       </div>
     </section>
@@ -378,72 +486,75 @@
     <!-- about us  -->
     <section
       class="about-us"
-      style="background-color: darkgray; padding-top: 20px; height: 110dvh;"
+      style="background-color: darkgray; padding-top: 20px; height: 110dvh"
     >
-        <div
-          class="about-content"
-          style="
-             max-width: 1200px; 
-             height: 100%;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr ;
-            gap: 3rem;
-          " 
-        >
-          <div class="about-text">
-            <h2>ABOUT US</h2>
-            <p>At EasyHome, we're redefining online shopping through curated
-              collections, exceptional quality, and customer-first service.We've
-              grown from a small startup to a trusted name in ecommerce,
-              delivering happiness to over 1000 customers.</p>
-          </div>
-          
-          
-          <!-- right column -->
-          <div class="about-img">
-             <img src="/images/indexab1.jpg" alt="" class="img1" />
-            <img src="/images/indexab1.jpg" alt="" class="img2" />  
-            <img src="/images/indexab2.jpg" alt="" class="img3" />  
-            <img src="/images/indexab3.jpg" alt="" class="img4" />  
-          </div>
+      <div
+        class="about-content"
+        style="
+          max-width: 1200px;
+          height: 100%;
+          margin: 0 auto;
+          padding: 0 2rem;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 3rem;
+        "
+      >
+        <div class="about-text">
+          <h2>ABOUT US</h2>
+          <p>
+            At EasyHome, we're redefining online shopping through curated
+            collections, exceptional quality, and customer-first service.We've
+            grown from a small startup to a trusted name in ecommerce,
+            delivering happiness to over 1000 customers.
+          </p>
         </div>
-        
+
+        <!-- right column -->
+        <div class="about-img">
+          <img src="/images/indexab1.jpg" alt="" class="img1" />
+          <img src="/images/indexab1.jpg" alt="" class="img2" />
+          <img src="/images/indexab2.jpg" alt="" class="img3" />
+          <img src="/images/indexab3.jpg" alt="" class="img4" />
+        </div>
+      </div>
+
       <!-- Content Section -->
     </section>
 
     <section class="mis">
-      <img src="/images/mision.jpg" alt="">
+      <img src="/images/mision.jpg" alt="" />
       <div class="mis-over">
-        <div class="mission-vision" style="display: grid; gap: 2rem; margin-top: 50px;">
+        <div
+          class="mission-vision"
+          style="display: grid; gap: 2rem; margin-top: 50px"
+        >
           <div
             class="mission"
             style="padding-left: 1.5rem; border-left: 3px solid #fde910"
           >
             <h3 style="color: #fde910; margin-bottom: 1rem">Our Mission</h3>
-            <p style="line-height: 1.6; color: white; ">
-              To empower consumers with high-quality products, seamless
-              shopping experiences, and value that extends beyond the
-              transaction.
+            <p style="line-height: 1.6; color: white">
+              To empower consumers with high-quality products, seamless shopping
+              experiences, and value that extends beyond the transaction.
             </p>
           </div>
 
           <div
             class="vision"
-            style="padding-right: 1.5rem; border-right: 3px solid #fde910; padding-top:0px ;"
+            style="
+              padding-right: 1.5rem;
+              border-right: 3px solid #fde910;
+              padding-top: 0px;
+            "
           >
-            <h3
-              style="color: #fde910; margin-bottom: 1rem; text-align: right"
-            >
+            <h3 style="color: #fde910; margin-bottom: 1rem; text-align: right">
               Our Vision
             </h3>
-            <p style="line-height: 1.6; text-align: right; color: white;">
+            <p style="line-height: 1.6; text-align: right; color: white">
               To become the most customer-centric ecommerce platform while
-              maintaining sustainable business practices and community
-              impact.
+              maintaining sustainable business practices and community impact.
             </p>
-
           </div>
         </div>
       </div>
@@ -452,7 +563,7 @@
     <!-- testimonials  -->
     <section
       class="testimonials"
-      style="background-color: #ffffff; padding: 5rem 0; height: auto;"
+      style="background-color: #ffffff; padding: 5rem 0; height: auto"
     >
       <div
         class="testimonials-container"
@@ -827,77 +938,8 @@
       padding: 1rem 0;
     }
   }
-  .task {
-    background-color: black;
-    width: 98vw;
-    height: 15vh;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    margin: auto;
-    margin-bottom: 5px;
-  }
-  .taskbar {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    padding-left: 10px;
-    padding-right: 10px;
-    justify-content: space-evenly;
-  }
-  .category {
-    position: relative;
-    padding-left: 5px;
-    padding-right: 5px;
-    width: auto;
-    height: 100%;
-  }
-  .category h6 {
-    font-size: 12px;
-    padding-top: 40px;
-    cursor: pointer;
-    color: #ffffff;
-  }
-  .subcategory {
-    position: absolute;
-    top: 100%;
-    z-index: 50;
-    background-color: #ffffff;
-    height: auto;
-    width: 100%;
-    overflow-x: none;
-    border-radius: 10px;
-    box-shadow: 2px 2px 15px darkgray;
-    display: none;
-  }
-  .subcategory a {
-    text-decoration: none;
-    color: #0f0616;
-    width: 100%;
-  }
-  .subcategory li {
-    text-align: center;
-    border-bottom: solid lightgray 1px;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    padding-left: 10px;
-    padding-right: 10px;
-    list-style: none;
-    border-radius: 10px;
-  }
-  .subcategory li:hover {
-    background-color: var(--gold);
-    transition: 1s ease-in-out;
-  }
-  .subcategory li a:hover {
-    color: goldenrod;
-    transition: 1s;
-  }
-  .subcategory :last-child {
-    border-bottom: none;
-  }
-  .category:hover .subcategory {
-    display: block;
-  }
+ 
+
 
   .sec2 {
     height: 85vh;
@@ -1077,27 +1119,26 @@
   }
 
   /* about content */
-  .about-text{
+  .about-text {
     padding-top: 7em;
     color: white;
-
   }
-  .about-text p{
+  .about-text p {
     padding-top: 20px;
     font-size: 20px;
   }
-  .about-img{
+  .about-img {
     height: 100vh;
     position: relative;
     display: flex;
   }
-  .about-img .img1{
+  .about-img .img1 {
     height: 500px;
     width: 100%;
     object-fit: cover;
     clip-path: ellipse(50% 50% at right);
   }
-  .about-img .img2{
+  .about-img .img2 {
     height: 500px;
     width: 100%;
     object-fit: cover;
@@ -1105,7 +1146,7 @@
     clip-path: ellipse(50% 50% at left);
     overflow: hidden;
   }
-  .about-img .img3{
+  .about-img .img3 {
     position: absolute;
     height: 200px;
     width: 200px;
@@ -1113,7 +1154,7 @@
     border: solid white 5px;
     border-radius: 50%;
   }
-  .about-img .img4{
+  .about-img .img4 {
     position: absolute;
     height: 200px;
     width: 200px;
@@ -1123,46 +1164,44 @@
     top: 60%;
     left: 30%;
   }
-  .about-img img:hover{
-     transform: scale(1.05);
-     transition: 1s ease-in ;
+  .about-img img:hover {
+    transform: scale(1.05);
+    transition: 1s ease-in;
   }
   /* Mobile Responsive */
   @media (max-width: 768px) {
     .about-content {
       grid-template-columns: 1fr !important;
     }
- 
-    .about-img .img1{
+
+    .about-img .img1 {
       height: 270px;
       clip-path: ellipse(50% 50% at right);
     }
-    .about-img .img2{
+    .about-img .img2 {
       height: 270px;
       clip-path: ellipse(50% 50% at left);
     }
-    .about-img .img3{
+    .about-img .img3 {
       height: 120px;
       width: 120px;
     }
-    .about-img .img4{
+    .about-img .img4 {
       height: 120px;
       width: 120px;
       top: 25%;
     }
-    .about-text{
-      padding-top:20px;
+    .about-text {
+      padding-top: 20px;
     }
-   
   }
 
-  .services{
+  .services {
     height: 50vh;
     width: 100%;
     margin-bottom: 5px;
-
   }
-  .sub-services{
+  .sub-services {
     display: flex;
     height: 100%;
     width: 90%;
@@ -1172,45 +1211,43 @@
     align-items: center;
     justify-content: space-evenly;
   }
-  .service-card{
+  .service-card {
     height: 35vh;
     width: 30%;
     background-color: #3d474e;
     border-radius: 10px;
     padding-top: 30px;
     text-align: center;
-     line-height: 25px;
-     color: white;
+    line-height: 25px;
+    color: white;
   }
-  .service-card:hover{
+  .service-card:hover {
     background-color: white;
     color: #3d474e;
     transition: 1s ease-in-out;
-    border: #3d474e solid 1px ;
+    border: #3d474e solid 1px;
   }
-  
 
   /* mission  */
 
-  .mis{
-      background-color: darkgray;
-      height: 60vh;
-      width: 100%;
-      position: relative;
+  .mis {
+    background-color: darkgray;
+    height: 60vh;
+    width: 100%;
+    position: relative;
   }
-  .mis img{
+  .mis img {
     height: 100%;
     width: 100%;
     object-fit: cover;
   }
-  .mis-over{
+  .mis-over {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
     background: rgba(0, 0, 0, 0.5);
-
   }
 
   /* testimonials */
