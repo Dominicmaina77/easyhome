@@ -32,30 +32,10 @@
     </script>
     <!-- slider -->
     <script src="script.js"></script>
-    <!-- carousel -->
-    <script>
-      // Simple carousel controls
-      const slider = document.querySelector(".carousel-slider");
-      let isPaused = false;
-
-      slider.addEventListener("mouseenter", () => (isPaused = true));
-      slider.addEventListener("mouseleave", () => (isPaused = false));
-
-      // Optional: Add manual controls
-      function slide(direction) {
-        const currentTransform = window.getComputedStyle(slider).transform;
-        const matrix = new DOMMatrix(currentTransform);
-        const currentSlide = Math.round(matrix.m41 / window.innerWidth);
-
-        if (direction === "next") {
-          slider.style.transform = `translateX(-${(currentSlide + 1) * 20}%)`;
-        } else {
-          slider.style.transform = `translateX(-${(currentSlide - 1) * 20}%)`;
-        }
-      }
-    </script>
+   
     <!-- taskbar -->
-    <!-- <script>
+     <script src="tasbar.js"></script>
+     <!-- <script> 
       // Mobile navigation toggle functionality
       const mobileToggle = document.getElementById('mobileToggle');
       const navigation = document.getElementById('navigation');
@@ -118,7 +98,7 @@
               });
           });
       }
-  </script> -->
+  </script>  -->
   </head>
   <body>
     <section class="sec1">
